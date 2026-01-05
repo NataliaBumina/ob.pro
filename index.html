@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КирпичМастер - Профессиональная кирпичная кладка</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(71, 85, 105, 0.9) 100%),
+                        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920') center/cover;
+        }
+        
+        .brick-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='42' height='22' viewBox='0 0 42 22' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b45309' fill-opacity='0.1'%3E%3Cpath d='M0 0h20v10H0V0zm22 0h20v10H22V0zM0 12h20v10H0V12zm22 0h20v10H22V12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .counter-value {
+            background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d97706;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Навигация -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-cubes text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-white">КирпичМастер</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="nav-link text-white hover:text-amber-400 transition">Главная</a>
+                    <a href="#services" class="nav-link text-white hover:text-amber-400 transition">Услуги</a>
+                    <a href="#about" class="nav-link text-white hover:text-amber-400 transition">О нас</a>
+                    <a href="#portfolio" class="nav-link text-white hover:text-amber-400 transition">Портфолио</a>
+                    <a href="#contact" class="nav-link text-white hover:text-amber-400 transition">Контакты</a>
+                </div>
+                <a href="tel:+79001234567" class="hidden md:flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-lg font-semibold transition">
+                    <i class="fas fa-phone"></i>
+                    +7 (900) 123-45-67
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Мобильное меню -->
+        <div id="mobileMenu" class="hidden md:hidden bg-slate-800 pb-4">
+            <div class="flex flex-col items-center gap-4 pt-4">
+                <a href="#home" class="text-white hover:text-amber-400 transition">Главная</a>
+                <a href="#services" class="text-white hover:text-amber-400 transition">Услуги</a>
+                <a href="#about" class="text-white hover:text-amber-400 transition">О нас</a>
+                <a href="#portfolio" class="text-white hover:text-amber-400 transition">Портфолио</a>
+                <a href="#contact" class="text-white hover:text-amber-400 transition">Контакты</a>
+                <a href="tel:+79001234567" class="flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-lg">
+                    <i class="fas fa-phone"></i>
+                    +7 (900) 123-45-67
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero секция -->
+    <section id="home" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 brick-pattern opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 bg-amber-600/20 border border-amber-500/30 rounded-full px-4 py-2 mb-6">
+                    <i class="fas fa-star text-amber-400"></i>
+                    <span class="text-amber-200 text-sm">Более 15 лет на рынке</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                    Профессиональная<br>
+                    <span class="text-amber-500">кирпичная кладка</span><br>
+                    любой сложности
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                    Выполняем работы по кирпичной кладке в промышленных помещениях, 
+                    жилых зданиях и коттеджном строительстве. Гарантия качества и соблюдение сроков.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition flex items-center justify-center gap-2">
+                        <i class="fas fa-calculator"></i>
+                        Рассчитать стоимость
+                    </a>
+                    <a href="#portfolio" class="border-2 border-white/30 hover:border-amber-500 text-white px-8 py-4 rounded-lg font-semibold text-lg transition flex items-center justify-center gap-2">
+                        <i class="fas fa-images"></i>
+                        Наши работы
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 floating">
+            <a href="#services" class="text-white/60 hover:text-amber-400 transition">
+                <i class="fas fa-chevron-down text-3xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="py-16 bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-5xl font-extrabold counter-value mb-2">15+</div>
+                    <div class="text-gray-600">Лет опыта</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-extrabold counter-value mb-2">500+</div>
+                    <div class="text-gray-600">Выполненных проектов</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-extrabold counter-value mb-2">50+</div>
+                    <div class="text-gray-600">Мастеров в команде</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-extrabold counter-value mb-2">100%</div>
+                    <div class="text-gray-600">Довольных клиентов</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="py-24 brick-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-amber-600 font-semibold uppercase tracking-wider">Наши услуги</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mt-2">Направления работы</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                    Мы специализируемся на всех видах кирпичной кладки и предлагаем 
+                    комплексные решения для любых объектов
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Промышленные помещения -->
+                <div class="service-card bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600" alt="Промышленное строительство" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                        <i class="fas fa-industry text-6xl text-white relative z-10"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Промышленные объекты</h3>
+                        <p class="text-gray-600 mb-4">
+                            Кладка стен и перегородок на заводах, складах, ангарах и производственных цехах любой площади.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Огнеупорная кладка
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Промышленные печи
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Дымовые трубы
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-flex items-center gap-2 text-amber-600 font-semibold hover:text-amber-700">
+                            Подробнее <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Жилые здания -->
+                <div class="service-card bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600" alt="Жилые здания" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                        <i class="fas fa-building text-6xl text-white relative z-10"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Жилые здания</h3>
+                        <p class="text-gray-600 mb-4">
+                            Многоэтажное строительство, возведение несущих стен и внутренних перегородок в жилых комплексах.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Многоэтажные дома
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Таунхаусы
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Жилые комплексы
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-flex items-center gap-2 text-amber-600 font-semibold hover:text-amber-700">
+                            Подробнее <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Коттеджи -->
+                <div class="service-card bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-orange-600 to-red-700 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600" alt="Коттеджи" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                        <i class="fas fa-home text-6xl text-white relative z-10"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Коттеджное строительство</h3>
+                        <p class="text-gray-600 mb-4">
+                            Строительство частных домов, коттеджей и загородных резиденций под ключ с гарантией качества.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Частные дома
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Заборы и ограждения
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-600">
+                                <i class="fas fa-check text-amber-600"></i>
+                                Камины и барбекю
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-flex items-center gap-2 text-amber-600 font-semibold hover:text-amber-700">
+                            Подробнее <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-amber-600 font-semibold uppercase tracking-wider">О компании</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mt-2 mb-6">
+                        Строим надёжно<br>уже 15 лет
+                    </h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                        Компания «КирпичМастер» — это команда профессионалов с многолетним опытом 
+                        в сфере кирпичной кладки. Мы работаем с объектами любой сложности: 
+                        от небольших коттеджей до крупных промышленных комплексов.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                        Наши мастера регулярно проходят обучение и используют современные технологии 
+                        и качественные материалы, что гарантирует долговечность и надёжность каждого объекта.
+                    </p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fas fa-shield-alt text-amber-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Гарантия 5 лет</h4>
+                                <p class="text-gray-600 text-sm">На все виды работ</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fas fa-file-contract text-amber-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Договор</h4>
+                                <p class="text-gray-600 text-sm">Официальное оформление</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fas fa-clock text-amber-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Точные сроки</h4>
+                                <p class="text-gray-600 text-sm">Соблюдаем дедлайны</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fas fa-ruble-sign text-amber-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Честные цены</h4>
+                                <p class="text-gray-600 text-sm">Без скрытых платежей</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800" alt="Наша работа" class="rounded-2xl shadow-2xl">
+                    <div class="absolute -bottom-8 -left-8 bg-amber-600 text-white p-6 rounded-2xl shadow-xl">
+                        <div class="text-4xl font-bold">500+</div>
+                        <div class="text-amber-200">Успешных проектов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section id="portfolio" class="py-24 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-amber-500 font-semibold uppercase tracking-wider">Портфолио</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mt-2">Наши работы</h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+                    Примеры выполненных проектов в различных сегментах строительства
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gallery-item group relative rounded-xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1541976590-713941681591?w=600" alt="Проект 1" class="w-full h-72 object-cover transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-6">
+                        <div>
+                            <span class="text-amber-400 text-sm">Промышленный объект</span>
+                            <h4 class="text-white text-xl font-bold">Склад логистического центра</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item group relative rounded-xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600" alt="Проект 2" class="w-full h-72 object-cover transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-6">
+                        <div>
+                            <span class="text-amber-400 text-sm">Жилой комплекс</span>
+                            <h4 class="text-white text-xl font-bold">ЖК "Солнечный"</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item group relative rounded-xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600" alt="Проект 3" class="w-full h-72 object-cover transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-6">
+                        <div>
+                            <span class="text-amber-400 text-sm">Коттедж</span>
+                            <h4 class="text-white text-xl font-bold">Частный дом в посёлке "Лесной"</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item group relative rounded-xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600" alt="Проект 4" class="w-full h-72 object-cover transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-6">
+                        <div>
+                            <span class="text-amber-400 text-sm">Коммерческий объект</span>
+                            <h4 class="text-white text-xl font-bold">Торговый центр</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item group relative rounded-xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600" alt="Проект 5" class="w-full h-72 object-cover transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-6">
+                        <div>
+                            <span class="text-amber-400 text-sm">Коттедж</span>
+                            <h4 class="text-white text-xl font-bold">Загородная резиденция</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item group relative rounded-xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1590274853856-f22d5ee3d228?w=600" alt="Проект 6" class="w-full h-72 object-cover transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-6">
+                        <div>
+                            <span class="text-amber-400 text-sm">Жилой комплекс</span>
+                            <h4 class="text-white text-xl font-bold">ЖК "Центральный"</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Этапы работы -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-amber-600 font-semibold uppercase tracking-wider">Как мы работаем</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mt-2">Этапы сотрудничества</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="relative text-center">
+                    <div class="w-20 h-20 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">1</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Заявка</h4>
+                    <p class="text-gray-600">Оставьте заявку на сайте или позвоните нам</p>
+                    <div class="hidden md:block absolute top-10 left-full w-full h-0.5 bg-amber-200 -translate-x-1/2"></div>
+                </div>
+                <div class="relative text-center">
+                    <div class="w-20 h-20 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">2</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Замер</h4>
+                    <p class="text-gray-600">Бесплатный выезд специалиста на объект</p>
+                    <div class="hidden md:block absolute top-10 left-full w-full h-0.5 bg-amber-200 -translate-x-1/2"></div>
+                </div>
+                <div class="relative text-center">
+                    <div class="w-20 h-20 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">3</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Договор</h4>
+                    <p class="text-gray-600">Составляем смету и заключаем договор</p>
+                    <div class="hidden md:block absolute top-10 left-full w-full h-0.5 bg-amber-200 -translate-x-1/2"></div>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">4</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Работа</h4>
+                    <p class="text-gray-600">Выполняем работы точно в срок</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма связи -->
+    <section id="contact" class="py-24 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div>
+                    <span class="text-amber-500 font-semibold uppercase tracking-wider">Контакты</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-2 mb-6">Свяжитесь с нами</h2>
+                    <p class="text-gray-400 text-lg mb-8">
+                        Оставьте заявку и мы свяжемся с вами в течение 30 минут для 
+                        бесплатной консультации и расчёта стоимости работ.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-amber-600/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-phone text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-400 text-sm">Телефон</div>
+                                <a href="tel:+79001234567" class="text-white text-lg font-semibold hover:text-amber-400">+7 (900) 123-45-67</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-amber-600/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-400 text-sm">Email</div>
+                                <a href="mailto:info@kirpichmaster.ru" class="text-white text-lg font-semibold hover:text-amber-400">info@kirpichmaster.ru</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-amber-600/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-400 text-sm">Адрес</div>
+                                <span class="text-white text-lg font-semibold">г. Москва, ул. Строителей, 15</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-amber-600/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-clock text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-400 text-sm">Режим работы</div>
+                                <span class="text-white text-lg font-semibold">Пн-Пт: 9:00 - 19:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-2xl">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Оставить заявку</h3>
+                    <form id="contactForm" class="space-y-5">
+                        <div>
+                            <label class="block text-gray-600 mb-2 font-medium">Ваше имя</label>
+                            <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition" placeholder="Иван Иванов">
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 mb-2 font-medium">Телефон</label>
+                            <input type="tel" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition" placeholder="+7 (___) ___-__-__">
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 mb-2 font-medium">Тип объекта</label>
+                            <select name="type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition">
+                                <option value="">Выберите тип объекта</option>
+                                <option value="industrial">Промышленный объект</option>
+                                <option value="residential">Жилое здание</option>
+                                <option value="cottage">Коттедж / Частный дом</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 mb-2 font-medium">Сообщение</label>
+                            <textarea name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition resize-none" placeholder="Опишите ваш проект..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 rounded-lg font-semibold text-lg transition flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i>
+                            Отправить заявку
+                        </button>
+                        <p class="text-gray-500 text-sm text-center">
+                            Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cubes text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-white">КирпичМастер</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Профессиональная кирпичная кладка для промышленных и жилых объектов с 2009 года.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Услуги</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Промышленные объекты</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Жилые здания</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Коттеджи</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Камины и печи</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Компания</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-amber-400 transition">О нас</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-amber-400 transition">Портфолио</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-amber-400 transition">Контакты</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Вакансии</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Мы в соцсетях</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500">&copy; 2024 КирпичМастер. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Навигация при скролле
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate-900', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-slate-900', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Мобильное меню
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Закрытие мобильного меню при клике на ссылку
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Форма
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Показываем уведомление
+            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            contactForm.reset();
+        });
+
+        // Маска для телефона
+        const phoneInput = document.querySelector('input[name="phone"]');
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value[0] === '8') value = '7' + value.slice(1);
+                if (value[0] !== '7') value = '7' + value;
+            }
+            
+            let formatted = '';
+            if (value.length > 0) formatted = '+' + value[0];
+            if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+            if (value.length > 4) formatted += ') ' + value.slice(4, 7);
+            if (value.length > 7) formatted += '-' + value.slice(7, 9);
+            if (value.length > 9) formatted += '-' + value.slice(9, 11);
+            
+            e.target.value = formatted;
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
