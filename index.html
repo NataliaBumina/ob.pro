@@ -1,444 +1,541 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ООО «Объединенные Бригадиры» — Генподрядчик ПГС</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <style>
-    :root {
-      color-scheme: dark;
-    }
-    body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0b1420;
-      color: #f4f6fb;
-    }
-    .grid-pattern {
-      background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-      background-size: 32px 32px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДА И ДА ПРОДУКТЫ - Клуб оптовых цен</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+            min-height: 100vh;
+            color: #000;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: #FFD700;
+        }
+
+        .logo-text {
+            text-align: left;
+        }
+
+        .logo-text h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Styles */
+        .section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title svg {
+            width: 18px;
+            height: 18px;
+            fill: #FFA500;
+        }
+
+        .section-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #000;
+        }
+
+        .section-value.large {
+            font-size: 38px;
+        }
+
+        .section-value .unit {
+            font-size: 18px;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-card .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-card .label svg {
+            width: 16px;
+            height: 16px;
+            fill: #FFA500;
+        }
+
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .stat-card .value .small {
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        /* Highlight Card */
+        .highlight-card {
+            background: #000;
+            color: #FFD700;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .highlight-card .label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .highlight-card .value {
+            font-size: 48px;
+            font-weight: 900;
+        }
+
+        .highlight-card .subtitle {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        /* Investment Schedule */
+        .schedule-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .schedule-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .schedule-title svg {
+            width: 20px;
+            height: 20px;
+            fill: #FFA500;
+        }
+
+        .schedule-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 120px;
+            padding: 10px 0;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 12px;
+        }
+
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .bar {
+            width: 32px;
+            background: linear-gradient(180deg, #FFA500 0%, #FFD700 100%);
+            border-radius: 6px 6px 0 0;
+            min-height: 8px;
+            position: relative;
+        }
+
+        .bar-value {
+            font-size: 9px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .bar-label {
+            font-size: 10px;
+            margin-top: 8px;
+            opacity: 0.6;
+            font-weight: 600;
+        }
+
+        /* Geography Section */
+        .geo-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .geo-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .geo-title svg {
+            width: 20px;
+            height: 20px;
+            fill: #FFA500;
+        }
+
+        .geo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .geo-item:last-child {
+            border-bottom: none;
+        }
+
+        .geo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .geo-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #000;
+        }
+
+        .geo-text h4 {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .geo-text p {
+            font-size: 13px;
+            opacity: 0.6;
+        }
+
+        /* Market Badge */
+        .market-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.1);
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .market-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #000;
+            color: #FFD700;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+            fill: #FFD700;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section, .stat-card, .highlight-card, .schedule-section, .geo-section {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100">
-  <header class="relative overflow-hidden grid-pattern">
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 opacity-90"></div>
-    <div class="relative max-w-6xl mx-auto px-6 py-16 flex flex-col gap-10">
-      <div class="flex flex-col gap-6">
-        <p class="text-sm uppercase tracking-[0.4em] text-orange-400">ООО «Объединенные Бригадиры»</p>
-        <h1 class="text-4xl md:text-6xl font-semibold leading-tight text-slate-50">
-          Строим объекты промышленного масштаба: от котлована до сдачи госкомиссии
-        </h1>
-        <p class="text-lg md:text-xl text-slate-200 max-w-3xl">
-          Надежный генподрядчик в промышленно-гражданском строительстве. Объединяем сильных инженеров, бригадиров и службу качества, чтобы закрывать весь цикл ПГС — заводы, многоэтажные комплексы, гостиницы и склады.
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="#clients" class="inline-flex items-center rounded-full bg-orange-500 text-slate-950 font-semibold px-6 py-3 hover:bg-orange-400 transition">Пригласить в тендер</a>
-          <a href="#contact" class="inline-flex items-center rounded-full border border-slate-400 text-slate-100 font-semibold px-6 py-3 hover:border-orange-400 hover:text-orange-200 transition">Обсудить проект</a>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <p class="text-sm text-slate-300">Опыт</p>
-          <p class="text-3xl font-bold text-orange-400">15+ лет</p>
-          <p class="text-sm text-slate-300">в ПГС проектах любой сложности</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <p class="text-sm text-slate-300">Сданные объекты</p>
-          <p class="text-3xl font-bold text-orange-400">120+</p>
-          <p class="text-sm text-slate-300">заводов, ТЦ, жилых корпусов</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <p class="text-sm text-slate-300">Команда</p>
-          <p class="text-3xl font-bold text-orange-400">300+</p>
-          <p class="text-sm text-slate-300">полевых специалистов и ИТР</p>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto px-6 py-16 space-y-20">
-    <section id="about" class="grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <h2 class="text-3xl font-semibold text-slate-50 mb-4">О компании</h2>
-        <p class="text-slate-300 leading-relaxed">
-          Название «Объединенные Бригадиры» отражает нашу философию: мы собрали под одним управлением лучших бригадиров, мастеров участков и инженеров ПГС. Это практики с десятками запусков в резюме, а не кабинетные менеджеры. Каждая бригада отвечает головой за качество узлов, а штаб проекта обеспечивает логистику, техконтроль и документацию.
-        </p>
-        <p class="text-slate-300 leading-relaxed mt-4">
-          Мы входим на площадку с готовой командой, снабжением и понятными сроками. Наша роль — закрыть весь цикл генподрядчика и дать заказчику спокойствие по качеству и безопасности.
-        </p>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
-        <div class="flex items-center justify-between">
-          <span class="text-slate-300">География</span>
-          <span class="font-semibold text-orange-400">ЦФО · ПФО · Урал</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-slate-300">Статус</span>
-          <span class="font-semibold text-orange-400">СРО, ISO, технадзор</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-slate-300">Контроль</span>
-          <span class="font-semibold text-orange-400">3 уровня QA/QC</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-slate-300">Сроки</span>
-          <span class="font-semibold text-orange-400">точные графики ППР</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="space-y-8">
-      <div class="flex items-center justify-between">
-        <h2 class="text-3xl font-semibold text-slate-50">Услуги генерального подрядчика</h2>
-        <span class="text-sm uppercase tracking-[0.3em] text-orange-400">ПГС полный цикл</span>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6">
-          <h3 class="text-xl font-semibold text-orange-300">Монолитные работы</h3>
-          <p class="text-slate-300 text-sm mt-2">Фундаменты, ригели, плиты, силовые каркасы с собственным парком опалубки.</p>
-        </article>
-        <article class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6">
-          <h3 class="text-xl font-semibold text-orange-300">Монтаж металлоконструкций</h3>
-          <p class="text-slate-300 text-sm mt-2">Сборка и сварка ферм, колонн и мостовых кранов по BIM-моделям.</p>
-        </article>
-        <article class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6">
-          <h3 class="text-xl font-semibold text-orange-300">Кладка и фасадные работы</h3>
-          <p class="text-slate-300 text-sm mt-2">Газобетон, облицовочный кирпич, вентфасады и СФТК под «ключ».</p>
-        </article>
-        <article class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6">
-          <h3 class="text-xl font-semibold text-orange-300">Промышленные полы и инженерия</h3>
-          <p class="text-slate-300 text-sm mt-2">Плиты большой площади, напольные системы, электрика, слаботочка и HVAC.</p>
-        </article>
-        <article class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6">
-          <h3 class="text-xl font-semibold text-orange-300">Общие строительные работы</h3>
-          <p class="text-slate-300 text-sm mt-2">Инфраструктура участков, благоустройство, инженерные сети и ЛСТК.</p>
-        </article>
-        <article class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6">
-          <h3 class="text-xl font-semibold text-orange-300">Проектирование и BIM-координация</h3>
-          <p class="text-slate-300 text-sm mt-2">Работаем с цифровыми моделями, ведем ПТО, снабжение и авторский надзор.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="projects" class="space-y-10">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-        <div class="space-y-3">
-          <p class="text-sm uppercase tracking-[0.3em] text-orange-400">Портфолио</p>
-          <h2 class="text-3xl font-semibold text-slate-50">Показываем реальные объекты и сроки</h2>
-          <p class="text-slate-300 max-w-3xl">Заводы под ключ, жилые комплексы, логистические хабы — выходим на площадку с готовыми графиками и собственным парком техники. Каждым этапом руководят бригадиры, проверенные десятками проектов.</p>
-        </div>
-        <a href="#contact" class="inline-flex items-center justify-center rounded-full border border-slate-500 px-6 py-3 text-sm font-semibold text-slate-100 hover:border-orange-400 hover:text-orange-200 transition">Скачать презентацию</a>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-950 to-slate-900 p-6 space-y-4">
-          <div class="flex items-center justify-between">
-            <span class="text-xs uppercase tracking-[0.4em] text-orange-400">Завод</span>
-            <span class="text-slate-400 text-sm">36 000 м²</span>
-          </div>
-          <h3 class="text-xl font-semibold text-slate-50">Производственный кластер для машиностроения</h3>
-          <p class="text-slate-300 text-sm">Монолит, металлокаркас, инженерия и пусконаладка в рамках одного контракта. Окупаемость за счёт сжатых сроков.</p>
-          <ul class="text-xs text-slate-400 space-y-1">
-            <li>• Срок: 14 месяцев</li>
-            <li>• 18 бригад одновременно</li>
-            <li>• BIM-координация узлов</li>
-          </ul>
-        </article>
-        <article class="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-950 to-slate-900 p-6 space-y-4">
-          <div class="flex items-center justify-between">
-            <span class="text-xs uppercase tracking-[0.4em] text-orange-400">Девелопер</span>
-            <span class="text-slate-400 text-sm">4 башни</span>
-          </div>
-          <h3 class="text-xl font-semibold text-slate-50">Жилой комплекс бизнес-класса</h3>
-          <p class="text-slate-300 text-sm">Полный цикл ПГС: от котлована до отделки МОПов и благоустройства. Организовали трёхуровневый контроль качества.</p>
-          <ul class="text-xs text-slate-400 space-y-1">
-            <li>• Срок: 22 месяца</li>
-            <li>• 320 специалистов на пике</li>
-            <li>• Снижение переделок на 30%</li>
-          </ul>
-        </article>
-        <article class="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-950 to-slate-900 p-6 space-y-4">
-          <div class="flex items-center justify-between">
-            <span class="text-xs uppercase tracking-[0.4em] text-orange-400">Коммерция</span>
-            <span class="text-slate-400 text-sm">65 000 м²</span>
-          </div>
-          <h3 class="text-xl font-semibold text-slate-50">Многофункциональный торгово-отельный центр</h3>
-          <p class="text-slate-300 text-sm">Металлоконструкции, фасады, инженерные сети и ввода в эксплуатацию. Работали без остановки действующей части ТЦ.</p>
-          <ul class="text-xs text-slate-400 space-y-1">
-            <li>• Срок: 18 месяцев</li>
-            <li>• 24/7 график бетонных работ</li>
-            <li>• Пожарная сертификация «под ключ»</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="sites" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-8 space-y-8">
-      <div class="flex flex-col gap-3">
-        <p class="text-sm uppercase tracking-[0.3em] text-orange-400">Строительные площадки</p>
-        <h2 class="text-3xl font-semibold text-slate-50">Показываем сайты в работе</h2>
-        <p class="text-slate-300 max-w-3xl">Вы можете оценить ключевые объекты, которые сейчас ведём: заводы, логистические парки, гостиничные комплексы. Каждую площадку сопровождаем фото- и BIM-отчётами, а руководители участков всегда на связи.</p>
-        <div class="flex flex-wrap gap-3 text-xs text-slate-200">
-          <span class="px-3 py-1 rounded-full border border-slate-700">Монолит</span>
-          <span class="px-3 py-1 rounded-full border border-slate-700">Фасады</span>
-          <span class="px-3 py-1 rounded-full border border-slate-700">Инженерия</span>
-          <span class="px-3 py-1 rounded-full border border-slate-700">Пусконаладка</span>
-        </div>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="bg-slate-950/70 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-orange-400">
-            <span>Логистика</span>
-            <span>Санкт-Петербург</span>
-          </div>
-          <h3 class="text-xl font-semibold text-slate-50">Логистический парк «Север-М»</h3>
-          <p class="text-slate-300 text-sm">Монолит и металлокаркас 11 корпусов с собственным парком техники. Обеспечиваем параллельные потоки бетона и МК.</p>
-          <div>
-            <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
-              <span>Готовность</span>
-              <span>72%</span>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>ДА И ДА ПРОДУКТЫ</h1>
+                    <span>Клуб оптовых цен</span>
+                </div>
             </div>
-            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
-              <span class="block h-full w-[72%] bg-gradient-to-r from-orange-500 to-amber-400"></span>
-            </div>
-          </div>
-          <ul class="text-xs text-slate-400 space-y-1">
-            <li>• Этажность: 3-5</li>
-            <li>• Бригад: 14</li>
-            <li>• Контроль: BIM + лазерные сканы</li>
-          </ul>
-        </article>
-        <article class="bg-slate-950/70 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-orange-400">
-            <span>Отель</span>
-            <span>Казань</span>
-          </div>
-          <h3 class="text-xl font-semibold text-slate-50">Гостиничный кластер 4*</h3>
-          <p class="text-slate-300 text-sm">Закрываем фасады, инженерные сети и отделку МОПов. Работаем при действующем медицинском центре заказчика.</p>
-          <div>
-            <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
-              <span>Готовность</span>
-              <span>54%</span>
-            </div>
-            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
-              <span class="block h-full w-[54%] bg-gradient-to-r from-orange-500 to-amber-400"></span>
-            </div>
-          </div>
-          <ul class="text-xs text-slate-400 space-y-1">
-            <li>• Корпусов: 2 башни</li>
-            <li>• Штат: 180 специалистов</li>
-            <li>• QA/QC: ежедневные чек-листы</li>
-          </ul>
-        </article>
-        <article class="bg-slate-950/70 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-orange-400">
-            <span>Промышленность</span>
-            <span>Тольятти</span>
-          </div>
-          <h3 class="text-xl font-semibold text-slate-50">Завод автокомпонентов</h3>
-          <p class="text-slate-300 text-sm">Финишируем инженерные системы, промышленный пол и пусконаладку линий. Организована круглосуточная сменность.</p>
-          <div>
-            <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
-              <span>Готовность</span>
-              <span>88%</span>
-            </div>
-            <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
-              <span class="block h-full w-[88%] bg-gradient-to-r from-orange-500 to-amber-400"></span>
-            </div>
-          </div>
-          <ul class="text-xs text-slate-400 space-y-1">
-            <li>• Площадь: 42 000 м²</li>
-            <li>• Смен: 3</li>
-            <li>• Сертификация: ISO/TS 16949</li>
-          </ul>
-        </article>
-      </div>
-      <div class="flex flex-wrap gap-4">
-        <a href="#clients" class="inline-flex items-center rounded-full bg-orange-500 text-slate-950 font-semibold px-6 py-3 hover:bg-orange-400 transition">Запросить доступ к онлайн-отчету</a>
-        <a href="#projects" class="inline-flex items-center rounded-full border border-slate-600 px-6 py-3 text-sm font-semibold text-slate-100 hover:border-orange-400 hover:text-orange-200 transition">Посмотреть все объекты</a>
-      </div>
-    </section>
-
-    <section id="gallery" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-8 space-y-8">
-      <div class="space-y-3">
-        <p class="text-sm uppercase tracking-[0.3em] text-orange-400">Онлайн-гид по объектам</p>
-        <h2 class="text-3xl font-semibold text-slate-50">Смотрите сайты слева направо</h2>
-        <p class="text-slate-300 max-w-3xl">Переключайте карточки, чтобы увидеть живые фото с площадок и понять объём работ. Каждому заказчику даём такой же доступ в защищённые отчёты.</p>
-      </div>
-      <div class="relative">
-        <div class="overflow-hidden rounded-3xl border border-slate-800">
-          <div id="galleryTrack" class="flex transition-transform duration-500 ease-out">
-            <article class="gallery-slide min-w-full p-6 flex flex-col gap-4">
-              <div class="h-64 rounded-2xl bg-cover bg-center border border-slate-800" style="background-image:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80');"></div>
-              <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-orange-400">
-                <span>Завод</span>
-                <span>Челябинск</span>
-              </div>
-              <h3 class="text-2xl font-semibold text-slate-50">Линия порошковой металлургии</h3>
-              <p class="text-slate-300 text-sm">Монолитный каркас, монтаж МК и полы большой площади. Развёрнута ночная смена для ускорения цикла бетонирования.</p>
-              <ul class="text-xs text-slate-400 space-y-1">
-                <li>• 42 500 м²</li>
-                <li>• 4 крана Liebherr</li>
-                <li>• Срок: 12 месяцев</li>
-              </ul>
-            </article>
-            <article class="gallery-slide min-w-full p-6 flex flex-col gap-4">
-              <div class="h-64 rounded-2xl bg-cover bg-center border border-slate-800" style="background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80');"></div>
-              <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-orange-400">
-                <span>Девелопер</span>
-                <span>Москва</span>
-              </div>
-              <h3 class="text-2xl font-semibold text-slate-50">Жилой квартал «Симбио»</h3>
-              <p class="text-slate-300 text-sm">4 башни бизнес-класса. Управляем фасадами, инженерией и благоустройством, ведём цифровой журнал авторского надзора.</p>
-              <ul class="text-xs text-slate-400 space-y-1">
-                <li>• 68 000 м²</li>
-                <li>• 18 фасадных бригад</li>
-                <li>• BIM-координация узлов</li>
-              </ul>
-            </article>
-            <article class="gallery-slide min-w-full p-6 flex flex-col gap-4">
-              <div class="h-64 rounded-2xl bg-cover bg-center border border-slate-800" style="background-image:url('https://images.unsplash.com/photo-1433849647103-4bf66cca2f35?auto=format&fit=crop&w=900&q=80');"></div>
-              <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-orange-400">
-                <span>Коммерция</span>
-                <span>Сочи</span>
-              </div>
-              <h3 class="text-2xl font-semibold text-slate-50">Отельно-деловой центр SkyLine</h3>
-              <p class="text-slate-300 text-sm">Собираем металлоконструкции, делаем стеклянные фасады и инженерные системы HVAC. Работаем без остановки действующего корпуса.</p>
-              <ul class="text-xs text-slate-400 space-y-1">
-                <li>• 55 000 м²</li>
-                <li>• 24/7 бетонные смены</li>
-                <li>• Подключение к BMS</li>
-              </ul>
-            </article>
-          </div>
         </div>
-        <div class="flex flex-wrap items-center justify-between gap-4 mt-6">
-          <button id="galleryPrev" class="flex items-center gap-2 rounded-full border border-slate-700 px-5 py-2 text-sm font-semibold text-slate-100 hover:border-orange-400 hover:text-orange-200 transition">
-            ← Предыдущий объект
-          </button>
-          <div class="flex items-center gap-2 text-xs text-slate-400">
-            <span class="h-2 w-2 rounded-full bg-orange-500"></span>
-            <span>Видеообзор и фото обновляются еженедельно</span>
-          </div>
-          <button id="galleryNext" class="flex items-center gap-2 rounded-full bg-orange-500 text-slate-950 font-semibold px-5 py-2 hover:bg-orange-400 transition">
-            Следующий объект →
-          </button>
-        </div>
-      </div>
-    </section>
 
-    <section id="clients" class="bg-slate-900/70 border border-slate-800 rounded-3зл p-8 grid md:grid-cols-2 gap-8">
-      <div>
-        <p class="text-sm uppercase tracking-[0.3em] text-orange-400">Для заказчиков</p>
-        <h2 class="text-3xl font-semibold text-slate-50 mt-2">Ищете генподрядчика?</h2>
-        <p class="text-slate-300 mt-3">Готовы оперативно рассчитать смету, собрать техкоманду и выйти на объект в сжатые сроки.</p>
-        <ul class="mt-6 space-y-2 text-slate-300 text-sm">
-          <li>• Собственные прорабы и службы ПТО</li>
-          <li>• Прозрачные бюджеты и материалы в онлайне</li>
-          <li>• Опыт работы с девелоперами и промышленными гигантами</li>
-        </ul>
-      </div>
-      <form id="tenderForm" class="bg-slate-950/70 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <label class="block text-sm text-slate-300">Имя
-          <input type="text" name="name" required class="mt-1 w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none">
-        </label>
-        <label class="block text-sm text-slate-300">Телефон
-          <input type="tel" name="phone" required class="mt-1 w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none">
-        </label>
-        <label class="block text-sm text-slate-300">Название компании
-          <input type="text" name="company" required class="mt-1 w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none">
-        </label>
-        <label class="block text-sm text-slate-300">Комментарий / ТЗ
-          <textarea name="brief" rows="3" class="mt-1 w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none" placeholder="Коротко опишите задачу"></textarea>
-        </label>
-        <button type="submit" class="w-full bg-orange-500 text-slate-950 font-semibold rounded-lg py-3 hover:bg-orange-400 transition">Пригласить в проект / Отправить ТЗ</button>
-      </form>
-    </section>
-
-    <section id="career" class="space-y-10">
-      <div class="flex flex-col gap-4">
-        <p class="text-sm uppercase tracking-[0.3em] text-orange-400">HR-модуль</p>
-        <h2 class="text-3xl font-semibold text-slate-50">Приглашаем профессионалов в команду</h2>
-        <p class="text-slate-300 max-w-3xl">Ищем готовые бригады и узких специалистов. Даём стабильные объемы, честную оплату и поддержку снабжения. Работаем по прозрачным графикам и закрываем объемы в срок.</p>
-      </div>
-      <div class="grid lg:grid-cols-3 gap-8">
-        <form id="careerForm" class="lg:col-span-2 bg-slate-900/70 border border-slate-800 rounded-3xl p-6 space-y-4">
-          <div class="grid md:grid-cols-2 gap-4">
-            <label class="block text-sm text-slate-300">ФИО / Название бригады
-              <input type="text" name="crew" required class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none">
-            </label>
-            <label class="block text-sm text-slate-300">Телефон
-              <input type="tel" name="crewPhone" required class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none">
-            </label>
-          </div>
-          <div class="grid md:grid-cols-2 gap-4">
-            <label class="block text-sm text-slate-300">Образование / Квалификация
-              <input type="text" name="education" class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none">
-            </label>
-            <label class="block text-sm text-slate-300">Опыт работы (лет)
-              <input type="number" name="experience" min="0" class="mt-1 w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none">
-            </label>
-          </div>
-          <div>
-            <p class="text-sm text-slate-300 mb-2">Виды выполняемых работ</p>
-            <div class="grid md:grid-cols-2 gap-2 text-sm text-slate-200">
-              <label class="flex items-center gap-2"><input type="checkbox" name="workType" value="монолит" class="accent-orange-500"> Монолит</label>
-              <label class="flex items-center gap-2"><input type="checkbox" name="workType" value="металлоконструкции" class="accent-orange-500"> Металлоконструкции</label>
-              <label class="flex items-center gap-2"><input type="checkbox" name="workType" value="кладка" class="accent-orange-500"> Кладка / фасады</label>
-              <label class="flex items-center gap-2"><input type="checkbox" name="workType" value="инженерия" class="accent-orange-500"> Инженерные сети</label>
-              <label class="flex items-center gap-2"><input type="checkbox" name="workType" value="отделка" class="accent-orange-500"> Отделка</label>
-              <label class="flex items-center gap-2"><input type="checkbox" name="workType" value="другое" class="accent-orange-500"> Другое</label>
+        <!-- Investment Volume -->
+        <div class="section">
+            <div class="section-title">
+                <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                Объем инвестиций
             </div>
-            <textarea name="workDetails" rows="3" class="mt-3 w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-slate-100 focus:border-orange-400 focus:outline-none" placeholder="Расскажите о составе бригады, инструментах и готовности к выездам"></textarea>
-          </div>
-          <button type="submit" class="w-full bg-orange-500 text-slate-950 font-semibold rounded-lg py-3 hover:bg-orange-400 transition">Отправить анкету</button>
-        </form>
-        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 space-y-4">
-          <h3 class="text-xl font-semibold text-orange-300">Обучение и стажировка</h3>
-          <p class="text-slate-300 text-sm">Нет опыта в строительстве, но хотите работать с нами? Берём на оплачиваемую стажировку, обучаем стандартам безопасности и технологиям ПГС.</p>
-          <ul class="text-sm text-slate-300 space-y-2">
-            <li>• Наставники — действующие прорабы</li>
-            <li>• Быстрый выход на реальный объект</li>
-            <li>• Возможность роста до мастера участка</li>
-          </ul>
-          <a href="#career" class="inline-flex items-center text-orange-400 font-semibold">Оставить заявку →</a>
+            <div class="section-value large">64,6 <span class="unit">млн ₽</span></div>
         </div>
-      </div>
-    </section>
-  </main>
 
-  <footer id="contact" class="bg-slate-950 border-t border-slate-900">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
-      <div>
-        <p class="text-sm uppercase tracking-[0.3em] text-orange-400">Контакты</p>
-        <p class="text-slate-200 mt-3">Тел.: +7 (495) 000-00-00<br>Email: info@obrbrig.ru<br>Адрес: Москва, Промышленный проезд, 7</p>
-      </div>
-      <div>
-        <p class="text-sm uppercase tracking-[0.3em] text-orange-400">Соцсети</p>
-        <div class="flex gap-4 mt-3">
-          <a href="#" class="text-slate-200 hover:text-orange-400 transition">ВКонтакте</a>
-          <a href="#" class="text-slate-200 hover:text-orange-400 transition">Telegram</a>
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">
+                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    Первая выручка
+                </div>
+                <div class="value">6-й <span class="small">месяц</span></div>
+                <div class="section-subtitle">Июнь 2026</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    Окупаемость
+                </div>
+                <div class="value">18 <span class="small">мес</span></div>
+                <div class="section-subtitle">Возврат 66,6 млн ₽</div>
+            </div>
         </div>
-      </div>
-      <div class="flex flex-col justify-between">
-        <p class="text-sm text-slate-400">ООО «Объединенные Бригадиры» — надежный партнер в ПГС.</p>
-        <p class="text-sm text-slate-500">© 2024 ООО «Объединенные Бригадиры». Все права защищены.</p>
-      </div>
-    </div>
-  </footer>
 
-  <script>
-    function handleForm(formId, message) {
-      const form = document.getElementById(formId);
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert(message);
-        form.reset();
-      });
-    }
+        <!-- Highlight - Доходность -->
+        <div class="highlight-card">
+            <div class="label">
+                <svg viewBox="0 0 24 24" width="20" height="20" style="fill: #FFD700; vertical-align: middle; margin-right: 5px;"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                Доходность за 60 месяцев
+            </div>
+            <div class="value">1202%</div>
+            <div class="subtitle">Высокая рентабельность вложений</div>
+        </div>
 
-    handleForm('tenderForm', 'Спасибо! Мы свяжемся с вами для обсуждения проекта.');
-    handleForm('careerForm', 'Анкета получена. HR-служба свяжется с вами.');
-  </script>
-</body>
-</html>
+        <!-- Profit -->
+        <div class="section">
+            <div class="section-title">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg>
+                Прибыль инвестора (30%)
+            </div>
+            <div class="section-value">0,78 <span class="unit">млрд ₽</span></div>
+        </div>
+
+        <!-- Investment Schedule -->
+        <div class="schedule-section">
+            <div class="schedule-title">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                График инвестиций 2026
+            </div>
+            <div class="schedule-chart">
+                <div class="bar-container">
+                    <div class="bar-value">5 296</div>
+                    <div class="bar" style="height: 22%;"></div>
+                    <div class="bar-label">ЯНВ</div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-value">6 419</div>
+                    <div class="bar" style="height: 27%;"></div>
+                    <div class="bar-label">ФЕВ</div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-value">6 419</div>
+                    <div class="bar" style="height: 27%;"></div>
+                    <div class="bar-label">МАР</div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-value">23 618</div>
+                    <div class="bar" style="height: 100%;"></div>
+                    <div class="bar-label">АПР</div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-value">22 619</div>
+                    <div class="bar" style="height: 96%;"></div>
+                    <div class="bar-label">МАЙ</div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-value">175</div>
+                    <div class="bar" style="height: 5%;"></div>
+                    <div class="bar-label">ИЮН</div>
+                </div>
+            </div>
+            <div style="text-align: center; font-size: 12px; opacity: 0.6;">тыс. рублей</div>
+        </div>
+
+        <!-- Geography -->
+        <div class="geo-section">
+            <div class="geo-title">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                География проекта
+            </div>
+            <div class="geo-item">
+                <div class="geo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+                </div>
+                <div class="geo-text">
+                    <h4>Екатеринбург</h4>
+                    <p>Старт проекта</p>
+                </div>
+            </div>
+            <div class="geo-item">
+                <div class="geo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                </div>
+                <div class="geo-text">
+                    <h4>10 городов-миллионников</h4>
+                    <p>Масштабирование</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Section -->
+        <div class="section" style="text-align: center;">
+            <div class="section-title" style="justify-content: center;">
+                <svg viewBox="0 0 24 24"><path d="M18.36 9l.6 3H5.04l.6-3h12.72M20 4H4v2h16V4zm0 3H4l-1 5v2h1v6h10v-6h4v6h2v-6h1v-2l-1-5zM6 18v-4h6v4H6z"/></svg>
+                Рынок
+            </div>
+            <div class="market-badge">
+                <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                E-grocery
+            </div>
+            <div class="market-badge">
+                <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 
